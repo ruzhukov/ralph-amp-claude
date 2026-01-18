@@ -14,25 +14,10 @@ Based on [Geoffrey Huntley's Ralph pattern](https://ghuntley.com/ralph/).
 
 ## Setup
 
-### Option 1: Copy to your project
-
-Copy the ralph files into your project:
-
 ```bash
 # From your project root
-mkdir -p scripts/ralph
-cp /path/to/ralph/claude/ralph.sh scripts/ralph/
-cp /path/to/ralph/claude/prompt.md scripts/ralph/
+cp -a /path/to/ralph/claude/. .
 chmod +x scripts/ralph/ralph.sh
-```
-
-### Option 2: Install skills globally
-
-Copy the skills to your Claude Code config for use across all projects:
-
-```bash
-cp -r skills/prd ~/.claude/skills/
-cp -r skills/ralph ~/.claude/skills/
 ```
 
 ## Workflow
@@ -60,7 +45,7 @@ This creates `prd.json` with user stories structured for autonomous execution.
 ### 3. Run Ralph
 
 ```bash
-./ralph.sh [max_iterations]
+./scripts/ralph/ralph.sh [max_iterations]
 ```
 
 Default is 10 iterations.
@@ -79,13 +64,13 @@ Ralph will:
 
 | File | Purpose |
 |------|---------|
-| `ralph.sh` | The bash loop that spawns fresh Claude Code instances |
-| `prompt.md` | Instructions given to each Claude Code instance |
-| `prd.json` | User stories with `passes` status (the task list) |
-| `prd.json.example` | Example PRD format for reference |
-| `progress.txt` | Append-only learnings for future iterations |
-| `skills/prd/` | Skill for generating PRDs |
-| `skills/ralph/` | Skill for converting PRDs to JSON |
+| `scripts/ralph/ralph.sh` | The bash loop that spawns fresh Claude Code instances |
+| `scripts/ralph/prompt.md` | Instructions given to each Claude Code instance |
+| `scripts/ralph/prd.json` | User stories with `passes` status (the task list) |
+| `scripts/ralph/prd.json.example` | Example PRD format for reference |
+| `scripts/ralph/progress.txt` | Append-only learnings for future iterations |
+| `.claude/skills/prd/` | Skill for generating PRDs |
+| `.claude/skills/ralph/` | Skill for converting PRDs to JSON |
 
 ## Critical Concepts
 
@@ -141,10 +126,10 @@ Check current state:
 
 ```bash
 # See which stories are done
-cat prd.json | jq '.userStories[] | {id, title, passes}'
+cat scripts/ralph/prd.json | jq '.userStories[] | {id, title, passes}'
 
 # See learnings from previous iterations
-cat progress.txt
+cat scripts/ralph/progress.txt
 
 # Check git history
 git log --oneline -10
@@ -152,7 +137,7 @@ git log --oneline -10
 
 ## Customizing prompt.md
 
-Edit `prompt.md` to customize Ralph's behavior for your project:
+Edit `scripts/ralph/prompt.md` to customize Ralph's behavior for your project:
 - Add project-specific quality check commands
 - Include codebase conventions
 - Add common gotchas for your stack

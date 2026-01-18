@@ -11,7 +11,7 @@ Ralph is an autonomous AI agent loop that runs an AI coding assistant repeatedly
 | Version | Location | AI Tool | Command |
 |---------|----------|---------|---------|
 | Amp | Root (`./`) | [Amp](https://ampcode.com) | `./ralph.sh` |
-| Claude Code | `claude/` | [Claude Code](https://claude.ai/code) | `./claude/ralph.sh` |
+| Claude Code | `claude/` | [Claude Code](https://claude.ai/code) | `./claude/scripts/ralph/ralph.sh` |
 
 ## Commands
 
@@ -20,7 +20,7 @@ Ralph is an autonomous AI agent loop that runs an AI coding assistant repeatedly
 ./ralph.sh [max_iterations]
 
 # Run Ralph with Claude Code
-./claude/ralph.sh [max_iterations]
+./claude/scripts/ralph/ralph.sh [max_iterations]
 
 # Flowchart visualization
 cd flowchart && npm install && npm run dev   # Dev server
@@ -38,7 +38,7 @@ cd flowchart && npm run lint                 # Lint
 3. Checks for `<promise>COMPLETE</promise>` signal to exit
 4. Repeats until all stories pass or max iterations reached
 
-### Key Files (both versions have same structure)
+### Key Files
 
 | File | Purpose |
 |------|---------|
@@ -47,22 +47,16 @@ cd flowchart && npm run lint                 # Lint
 | `prd.json` | User stories with `passes` status |
 | `prd.json.example` | Example PRD format |
 | `progress.txt` | Append-only learnings between iterations |
-| `skills/prd/SKILL.md` | Skill for generating PRDs |
-| `skills/ralph/SKILL.md` | Skill for converting PRDs to JSON |
 
-### Installing Skills
+### Skills
 
-**For Amp:**
+**Amp:** Located in `skills/`. Install globally with:
 ```bash
 cp -r skills/prd ~/.config/amp/skills/
 cp -r skills/ralph ~/.config/amp/skills/
 ```
 
-**For Claude Code:**
-```bash
-cp -r claude/skills/prd ~/.claude/skills/
-cp -r claude/skills/ralph ~/.claude/skills/
-```
+**Claude Code:** Located in `claude/.claude/skills/`. Auto-discovered when you copy `claude/` contents to your project.
 
 ### Flowchart (`flowchart/`)
 Interactive React Flow visualization deployed to GitHub Pages. Built with Vite, React 19, TypeScript.
@@ -106,4 +100,4 @@ Interactive React Flow visualization deployed to GitHub Pages. Built with Vite, 
 
 1. Create PRD: Use prd skill → generates `tasks/prd-[feature].md`
 2. Convert to JSON: Use ralph skill → generates `prd.json`
-3. Run: `./ralph.sh` (or `./claude/ralph.sh`) until complete
+3. Run: `./ralph.sh` (or `./claude/scripts/ralph/ralph.sh`) until complete
