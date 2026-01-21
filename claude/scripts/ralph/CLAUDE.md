@@ -76,6 +76,7 @@ Only update CLAUDE.md if you have **genuinely reusable knowledge** that would he
 - Do NOT commit broken code
 - Keep changes focused and minimal
 - Follow existing code patterns
+- When a third party library is used, verify endpoint format with the library's actual API documentation
 
 ## Browser Testing (If Available)
 
