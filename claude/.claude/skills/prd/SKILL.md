@@ -90,6 +90,7 @@ Numbered list of specific functionalities:
 - "FR-2: When a user clicks X, the system must..."
 
 Be explicit and unambiguous.
+When a third party library is used, verify endpoint format with the library's actual API documentation.
 
 ### 5. Non-Goals (Out of Scope)
 What this feature will NOT include. Critical for managing scope.

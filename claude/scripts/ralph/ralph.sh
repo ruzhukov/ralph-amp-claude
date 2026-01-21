@@ -71,9 +71,9 @@ if [ -z "$CLAUDE_BIN" ]; then
 fi
 echo "Using claude binary: $CLAUDE_BIN"
 
-# Check if prompt.md exists
-if [ ! -f "$SCRIPT_DIR/prompt.md" ]; then
-  echo "Error: $SCRIPT_DIR/prompt.md not found."
+# Check if CLAUDE.md exists
+if [ ! -f "$SCRIPT_DIR/CLAUDE.md" ]; then
+  echo "Error: $SCRIPT_DIR/CLAUDE.md not found."
   exit 1
 fi
 
@@ -94,7 +94,7 @@ for i in $(seq 1 $MAX_ITERATIONS); do
   # Run Claude Code with the ralph prompt in non-interactive mode
   # --dangerously-skip-permissions skips all permission prompts (equivalent to amp --dangerously-allow-all)
   # -p runs in non-interactive/print mode
-  OUTPUT=$(cat "$SCRIPT_DIR/prompt.md" | "$CLAUDE_BIN" -p --dangerously-skip-permissions 2>&1 | tee /dev/stderr) || true
+  OUTPUT=$(cat "$SCRIPT_DIR/CLAUDE.md" | "$CLAUDE_BIN" -p --dangerously-skip-permissions 2>&1 | tee /dev/stderr) || true
 
   # Check for completion signal
   if echo "$OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then
